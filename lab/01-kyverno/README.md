@@ -1,6 +1,6 @@
 # Kyverno
 
-## Exampla
+## Exempla
 ```sh
 # policy
 > kubectl apply -f exempla/policy/
