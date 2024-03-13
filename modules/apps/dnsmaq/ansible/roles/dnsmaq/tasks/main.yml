@@ -1,0 +1,32 @@
+---
+- name: Instalar dnsmasq
+  apt:
+    name: dnsmasq
+    state: present
+
+- name: Criar arquivo de configuração temporário dnsmasq
+  template:
+    src: templates/dnsmasq.conf.j2
+    dest: /tmp/hosts.conf
+
+- name: Substituir /etc/dnsmasq.d/hosts.conf com o novo arquivo
+  become: true
+  copy:
+    src: /tmp/hosts.conf
+    dest: /etc/dnsmasq.d/hosts.conf
+
+- name: Reiniciar dnsmasq
+  become: true
+  service:
+    name: dnsmasq
+    state: restarted
+
+- name: Remover arquivo de configuração temporário dnsmasq
+  become: true
+  file:
+    path: /tmp/hosts.conf
+    state: absent
+
+
+
+  
