@@ -19,7 +19,7 @@ resource "null_resource" "wait_for_metallb" {
   }
 
   provisioner "local-exec" {
-    command = "/bin/bash ${path.module}/values/get_docker_network_ip.sh | kubectl apply -f - --namespace ${helm_release.metallb.namespace}"
+    command = "/bin/bash ${path.module}/file/get_docker_network_ip.sh | kubectl apply -f - --namespace ${helm_release.metallb.namespace}"
   }
 
   depends_on = [helm_release.metallb]

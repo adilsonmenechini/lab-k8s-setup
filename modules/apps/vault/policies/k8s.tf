@@ -21,4 +21,3 @@ resource "vault_kubernetes_auth_backend_role" "example" {
   audience                         = "https://kubernetes.default.svc.cluster.local"
 
 }
-

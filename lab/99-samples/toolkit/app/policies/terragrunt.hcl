@@ -7,6 +7,7 @@ dependency "cluster" {
     client_key             = "fake-client_key"
     cluster_ca_certificate = "fake-cluster_ca_certificate"
   }
+  mock_outputs_allowed_terraform_commands = ["apply", "plan", "destroy", "output"]
 }
 
 
@@ -15,6 +16,7 @@ dependency "vault_server" {
   mock_outputs = {
     client_token = "fake-client_token"
   }
+  mock_outputs_allowed_terraform_commands = ["apply", "plan", "destroy", "output"]
 }
 
 include {

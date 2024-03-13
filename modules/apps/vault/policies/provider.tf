@@ -1,10 +1,18 @@
 terraform {
-  required_version = ">=1.5.1"
+  required_version = ">=1.6.0"
     required_providers {
       vault = {
         source  = "hashicorp/vault"
         version = "3.25.0"
       }
+      kubectl = {
+        source  = "gavinbunney/kubectl"
+        version = ">=1.14.0"
+      }
+      kubernetes = {
+        source  = "hashicorp/kubernetes"
+        version = ">=2.27.0"
+    }
   }
 }
 
@@ -19,6 +27,6 @@ provider "helm" {
 }
 
 provider "vault" {
-  address = "https://vault.vault:8200"
+  address = "http://kind.internal:8200"
   token = var.client_token
 }
