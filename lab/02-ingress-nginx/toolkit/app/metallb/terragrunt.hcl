@@ -1,6 +1,6 @@
 
 dependency "cluster" {
-  config_path = "../../cluster"
+  config_path = "${get_path_to_repo_root()}//lab/02-ingress-nginx/toolkit/cluster"
   mock_outputs = {
     host                   = "fake-host"
     client_certificate     = "fake-client_certificate"
@@ -9,17 +9,13 @@ dependency "cluster" {
   }
 }
 
-dependency "metallb" {
-  config_path  = "../metallb"
-  skip_outputs = true
-}
-
 include {
   path = find_in_parent_folders()
 }
 
 terraform {
-  source = "${get_path_to_repo_root()}//modules/apps/ingress-nginx"
+  source = "${get_path_to_repo_root()}//modules/apps/metallb"
+
 }
 
 inputs = {

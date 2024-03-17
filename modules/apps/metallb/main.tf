@@ -10,7 +10,7 @@ resource "helm_release" "metallb" {
   create_namespace = true
 
   wait    = true
-  timeout = 600
+  timeout = 700
 }
 
 resource "null_resource" "wait_for_metallb" {

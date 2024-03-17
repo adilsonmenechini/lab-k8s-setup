@@ -7,16 +7,6 @@ dependency "cluster" {
     client_key             = "fake-client_key"
     cluster_ca_certificate = "fake-cluster_ca_certificate"
   }
-  mock_outputs_allowed_terraform_commands = ["apply", "plan", "destroy", "output"]
-}
-
-
-dependency "vault_server" {
-  config_path = "../server"
-  mock_outputs = {
-    client_token = "fake-client_token"
-  }
-  mock_outputs_allowed_terraform_commands = ["apply", "plan", "destroy", "output"]
 }
 
 include {
@@ -24,7 +14,7 @@ include {
 }
 
 terraform {
-  source = "${get_path_to_repo_root()}//modules/apps/vault/policies"
+  source = "${get_path_to_repo_root()}//modules/apps/metallb"
 
 }
 
@@ -33,5 +23,4 @@ inputs = {
   client_certificate     = dependency.cluster.outputs.client_certificate
   client_key             = dependency.cluster.outputs.client_key
   cluster_ca_certificate = dependency.cluster.outputs.cluster_ca_certificate
-  client_token           = dependency.vault_server.outputs.client_token
 }

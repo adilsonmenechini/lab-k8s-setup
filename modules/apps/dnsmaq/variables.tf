@@ -9,3 +9,4 @@ variable "dns_host" {
   type        = string
   default = "kind.local"
 }
+

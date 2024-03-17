@@ -27,6 +27,6 @@ provider "helm" {
 }
 
 provider "vault" {
-  address = "http://kind.internal:8200"
+  address = "http://${var.domain}:8200"
   token = var.client_token
 }

@@ -8,12 +8,18 @@
   template:
     src: templates/dnsmasq.conf.j2
     dest: /tmp/hosts.conf
-
+    owner: root
+    group: root
+    mode: '0644'
+    
 - name: Substituir /etc/dnsmasq.d/hosts.conf com o novo arquivo
   become: true
   copy:
     src: /tmp/hosts.conf
     dest: /etc/dnsmasq.d/hosts.conf
+    owner: root
+    group: root
+    mode: '0644'
 
 - name: Reiniciar dnsmasq
   become: true

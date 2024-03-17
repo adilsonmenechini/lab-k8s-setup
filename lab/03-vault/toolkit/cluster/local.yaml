@@ -1,0 +1,2 @@
+kube_version: "1.29.0"
+worker_counts: 3

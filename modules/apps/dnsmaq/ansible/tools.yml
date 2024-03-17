@@ -1,6 +1,7 @@
 ---
 - hosts: localhost
   become: true
+  become_user: root
   vars:
     dns_ip: "{{ dns_ip }}"
     dns_host: "{{ dns_host }}"
@@ -13,3 +14,5 @@
         - 1.1.1.1
     - role: 'dnsmaq'
       become: true
+      gather_facts: true
+      

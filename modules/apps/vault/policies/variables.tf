@@ -1,8 +1,15 @@
 variable "client_token" {
   description = "client token"
   type        = string
+  default = "fake-client-token"
 }
 
+variable "domain" {
+  description = "domain"
+  type        = string
+  default = "fake-domain"
+  
+}
 variable "host" {
   description = "host"
   type        = string
@@ -25,4 +32,10 @@ variable "cluster_ca_certificate" {
   description = "cluster ca certificate"
   type        = string
   default = "fake-cluster-ca-certificate"
+}
+
+variable "cluster_ip" {
+  description = "cluster ip"
+  type        = string
+  default = "kind.local"
 }

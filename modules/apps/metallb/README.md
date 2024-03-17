@@ -34,4 +34,6 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_helm_status"></a> [helm\_status](#output\_helm\_status) | n/a |
