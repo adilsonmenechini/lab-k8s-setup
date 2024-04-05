@@ -19,7 +19,6 @@ terraform {
 provider "helm" {
   kubernetes {
     host = var.host
-
     client_certificate     = var.client_certificate
     client_key             = var.client_key
     cluster_ca_certificate = var.cluster_ca_certificate
@@ -27,6 +26,13 @@ provider "helm" {
 }
 
 provider "vault" {
-  address = "http://${var.domain}:8200"
+  address = "http://${var.domain}:${var.vault_port}"
   token = var.client_token
+}
+
+provider "kubernetes" {
+  host                   = var.host
+  client_certificate     = var.client_certificate
+  client_key             = var.client_key
+  cluster_ca_certificate = var.cluster_ca_certificate
 }

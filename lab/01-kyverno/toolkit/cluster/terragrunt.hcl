@@ -14,7 +14,7 @@ locals {
 
 
 terraform {
-  source = "${get_path_to_repo_root()}//modules/cluster"
+  source = "../../../../modules/cluster"
   
 }
 

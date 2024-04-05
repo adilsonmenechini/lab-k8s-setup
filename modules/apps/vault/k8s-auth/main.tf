@@ -4,7 +4,7 @@ resource "vault_auth_backend" "kubernetes" {
 
 resource "vault_kubernetes_auth_backend_config" "example" {
   backend                = vault_auth_backend.kubernetes.path
-  kubernetes_host        = "https://kubernetes.default.svc:443"
+  kubernetes_host        = var.host
   kubernetes_ca_cert     = var.cluster_ca_certificate
   token_reviewer_jwt     = var.client_token
   disable_iss_validation = true

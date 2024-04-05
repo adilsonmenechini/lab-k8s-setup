@@ -9,17 +9,13 @@ dependency "cluster" {
   }
 }
 
-dependency "metallb" {
-  config_path  = "../metallb"
-  skip_outputs = true
-}
-
 include {
   path = find_in_parent_folders()
 }
 
 terraform {
-  source = "${get_path_to_repo_root()}//modules/apps/ingress-nginx"
+  source = "../../../../../modules/apps/metallb"
+
 }
 
 inputs = {

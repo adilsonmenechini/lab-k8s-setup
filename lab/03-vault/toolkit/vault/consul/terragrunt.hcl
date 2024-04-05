@@ -1,3 +1,7 @@
+locals {
+  global_vars = yamldecode(file(find_in_parent_folders("global.yaml")))
+  local_vars = yamldecode(file("local.yaml"))
+}
 
 dependency "cluster" {
   config_path = "../../cluster"
@@ -14,11 +18,13 @@ include {
 }
 
 terraform {
-  source = "${get_path_to_repo_root()}//modules/apps/metallb"
+  source = "../../../../../modules/apps/consul"
 
 }
 
 inputs = {
+  chart_namespace        = "vault"
+  chart_version          = local.local_vars.chart_version
   host                   = dependency.cluster.outputs.host
   client_certificate     = dependency.cluster.outputs.client_certificate
   client_key             = dependency.cluster.outputs.client_key

@@ -1,0 +1,40 @@
+- name: Initialize and unseal Vault
+  hosts: localhost
+  tasks:
+    - name: Initialize Vault with one key share and one key threshold
+      shell: kubectl exec -n {{ namespace }} vault-0 -- vault operator init -key-shares=1 -key-threshold=1 -format=json | jq -r '.unseal_keys_b64[0], .root_token'
+      register: unseal_root_keys
+      until: unseal_root_keys.rc == 0
+      retries: 10
+      delay: 10
+    - name: Separate extracted values
+      set_fact:
+        unseal_key_b64: "{{ unseal_root_keys.stdout_lines[0] }}"
+        root_token: "{{ unseal_root_keys.stdout_lines[1] }}"
+    - name: Unseal Vault-0 running on the pods
+      shell: kubectl exec -n {{ namespace }} vault-0 -- vault operator unseal {{ unseal_key_b64 }}
+      register: result
+      until: result.rc == 0
+      retries: 10
+      delay: 10
+    - name: Get pods of vault instance
+      shell: kubectl get pods -n {{ namespace }} | grep -E 'vault' | grep -v -e 'vault-0' -e 'vault-agent' | awk '{print $1}'
+      register: items
+    - name: Raft Vault running on the pods
+      shell: kubectl exec -n {{ namespace }} {{ item }} -- vault operator raft join http://vault-0.vault-internal:8200
+      with_items: "{{ items.stdout_lines }}"
+      register: result
+      until: result.rc == 0
+      retries: 10
+      delay: 30
+    - name: Unseal Vault running on the pods
+      shell: kubectl exec -n {{ namespace }} {{ item }} -- vault operator unseal  {{ unseal_key_b64 }}
+      with_items: "{{ items.stdout_lines }}"
+      register: result
+      until: result.rc == 0
+      retries: 10
+      delay: 10
+    - name: Write root_token to a file
+      copy:
+        content: "{{ root_token }}"
+        dest: "/tmp/ansible_output_file.txt"

@@ -1,15 +1,15 @@
-variable "client_token" {
-  description = "client token"
+variable "chart_version" {
   type        = string
-  default = "fake-client-token"
+  description = "version of the helm chart"
+  default     = "1.4.0"
 }
 
-variable "domain" {
-  description = "domain"
+variable "chart_namespace" {
   type        = string
-  default = "fake-domain"
-  
+  description = "namesapce of the helm chart"
+  default     = "vault"
 }
+
 variable "host" {
   description = "host"
   type        = string
@@ -32,10 +32,4 @@ variable "cluster_ca_certificate" {
   description = "cluster ca certificate"
   type        = string
   default = "fake-cluster-ca-certificate"
-}
-
-variable "cluster_ip" {
-  description = "cluster ip"
-  type        = string
-  default = "kind.local"
 }
