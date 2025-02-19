@@ -5,7 +5,7 @@ terraform {
 
 provider "helm" {
   kubernetes {
-    host = var.host
+    host = var.cluster_host
 
     client_certificate     = var.client_certificate
     client_key             = var.client_key
@@ -15,7 +15,7 @@ provider "helm" {
 
 
 provider "kubernetes" {
-  host = var.host
+  host = var.cluster_host
 
   client_certificate     = var.client_certificate
   client_key             = var.client_key

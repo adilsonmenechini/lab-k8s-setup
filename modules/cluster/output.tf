@@ -2,7 +2,7 @@ output "cluster_name" {
   value       = kind_cluster.default.name
 }
 
-output "host" {
+output "cluster_host" {
   value       = kind_cluster.default.endpoint
 }
 
@@ -23,4 +23,12 @@ output "cluster_ca_certificate" {
 
 output "extra_port_mappings" {
   value = var.extra_port_mappings
+}
+
+output "pod_cidr" {
+  value = var.pod_subnet
+}
+
+output "service_cidr" {
+  value = var.service_subnet
 }

@@ -36,5 +36,4 @@ inputs = {
   cluster_name        = local.cluster_name
   worker_counts       = local.local_vars.worker_counts
   extra_port_mappings = local.extra_port_mappings
-
 }

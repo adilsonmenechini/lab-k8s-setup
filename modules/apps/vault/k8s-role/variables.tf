@@ -1,23 +1,105 @@
-variable "k8_auth_path" {
-  default = "fake-k8-auth-path"
+variable "client_token" {
+  description = "Client token para autenticação no Kubernetes"
+  type        = string
+  default     = "fake-client-token"
 }
 
-variable "default_role_name" {
-  default = "fake-default-role-name"
+variable "cluster_host" {
+  description = "Endereço do host Kubernetes"
+  type        = string
+  default     = "fake-localshost"
 }
 
-variable "bound_sa_names" {
-  default = "fake-bound-sa-names"
+variable "client_certificate" {
+  description = "Certificado de cliente para comunicação segura"
+  type        = string
+  default     = "fake-client-certificate"
 }
 
-variable "bound_sa_namespaces" {
-  default = "fake-bound-sa-namespaces"
+variable "client_key" {
+  description = "Chave privada do cliente"
+  type        = string
+  default     = "fake-client-key"
 }
 
-variable "token_ttl" {
-  default = "fake-token-ttl"
+variable "cluster_ca_certificate" {
+  description = "Certificado CA do cluster Kubernetes"
+  type        = string
+  default     = "fake-cluster-ca-certificate"
 }
 
-variable "token_policies" {
-  default = "fake-token-policies"
+variable "cluster_ip" {
+  description = "Endereço IP do cluster"
+  type        = string
+  default     = "kind.local"
+}
+
+variable "vault_address" {
+  description = "vault address"
+  type        = string
+  default = "http://localhost"
+}
+
+variable "vault_port" {
+  description = "vault address"
+  type        = string
+  default = "32000"
+}
+
+
+variable "vault_mount_kv" {
+  description = "Configurações dos mounts do Vault"
+  type        = map(object({
+    type        = string
+    description = string
+  }))
+  default     = {
+    "admins" = {
+      type        = "kv-v2"
+      description = "KV2 Secrets Engine for Operations."
+    }
+  }
+}
+
+
+variable "vault_users" {
+  description = "Usuários autenticados via userpass"
+  type        = map(object({
+    password = string
+    policies = list(string)
+  }))
+  default     = {
+    "adilson" = {
+      password = "senhaSegura123"
+      policies = ["acesso_web", "developers"]
+    }
+  }
+}
+
+variable "vault_policies" {
+  description = "Map of Vault policies and their file paths"
+  type = map(string)
+  default = {
+    "admins"     = "file/admin_policy.hcl"
+
+    # Adicione outras políticas conforme necessário
+  }
+}
+
+variable "vault_k8s_roles" {
+  type = map(object({
+    bound_service_account_namespaces = list(string)
+    token_policies                   = list(string)
+    token_ttl                        = number
+    token_max_ttl                    = number
+  }))
+
+  default = {
+    "developer" = {
+      bound_service_account_namespaces = ["dev", "staging"]
+      token_policies                   = ["default", "developer"]
+      token_ttl                        = 1800
+      token_max_ttl                    = 3600
+    }
+  }
 }

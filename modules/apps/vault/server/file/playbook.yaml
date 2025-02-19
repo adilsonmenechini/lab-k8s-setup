@@ -16,7 +16,7 @@
       register: result
       until: result.rc == 0
       retries: 10
-      delay: 10
+      delay: 20
     - name: Get pods of vault instance
       shell: kubectl get pods -n {{ namespace }} | grep -E 'vault' | grep -v -e 'vault-0' -e 'vault-agent' | awk '{print $1}'
       register: items
@@ -28,7 +28,7 @@
       retries: 10
       delay: 30
     - name: Unseal Vault running on the pods
-      shell: kubectl exec -n {{ namespace }} {{ item }} -- vault operator unseal  {{ unseal_key_b64 }}
+      shell: kubectl exec -n {{ namespace }} {{ item }} -- vault operator unseal {{ unseal_key_b64 }}
       with_items: "{{ items.stdout_lines }}"
       register: result
       until: result.rc == 0

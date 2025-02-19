@@ -10,8 +10,8 @@ variable "service_type" {
   description = "service type"
 }
 
-variable "host" {
-  description = "host"
+variable "cluster_host" {
+  description = "cluster_host"
   type        = string
   default = "fake-localshost"
 }

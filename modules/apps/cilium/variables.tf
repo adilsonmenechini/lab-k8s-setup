@@ -4,8 +4,15 @@ variable "chart_version" {
   default     = "1.14.5"
 }
 
-variable "cluster_name" {
-  type        = string
-  description = "cluster name"
 
+variable "namespace" {
+  type        = string
+  description = "name namespace"
+  default     = "kube-system"
+}
+
+variable "values_file" {
+  type        = string
+  description = "values file"
+  default     = "./values.yaml"
 }

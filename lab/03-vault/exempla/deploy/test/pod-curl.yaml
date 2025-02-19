@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: operation-role
+  namespace: operations
+  labels:
+    app: operation-role-app
+spec:
+  serviceAccountName: operation-sa
+  restartPolicy: "OnFailure"
+  containers:
+  - name: operation-role
+    image: badouralix/curl-jq
+    command: [ "sh", "-c" ]
+    resources: {}
+    args:
+    - |
+      VAULT_ADDR="http://vault-internal.vault:8200"
+      SA_TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+      VAULT_RESPONSE=$(curl -X POST -H "X-Vault-Request: true" -d '{"jwt": "'"$SA_TOKEN"'", "role": "operation-role"}' $VAULT_ADDR/v1/auth/kubernetes/login | jq .)
+
+      echo $VAULT_RESPONSE
+      echo ""
+
+      VAULT_TOKEN=$(echo $VAULT_RESPONSE | jq -r '.auth.client_token')
+      echo $VAULT_TOKEN
+
+      echo "Fetching operations/data/webapp from vault...."
+      VAULT_SECRET=$(curl -s -H "X-Vault-Token: $VAULT_TOKEN" $VAULT_ADDR/v1/operations/data/webapp | jq .)
+      echo $VAULT_SECRET
+
+      exit 0;

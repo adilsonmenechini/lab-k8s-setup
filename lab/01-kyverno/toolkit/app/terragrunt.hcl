@@ -18,7 +18,7 @@ dependency "kind" {
 inputs = {
   chart_version = local.env_vars.chart_version
   name_kind = "${dependency.kind.outputs.cluster_name}"
-  host = dependency.kind.outputs.host
+  host = dependency.kind.outputs.cluster_host
   client_certificate = dependency.kind.outputs.client_certificate
   client_key = dependency.kind.outputs.client_key
   cluster_ca_certificate = dependency.kind.outputs.cluster_ca_certificate

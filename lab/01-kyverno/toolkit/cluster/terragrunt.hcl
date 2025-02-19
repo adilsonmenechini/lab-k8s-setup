@@ -4,8 +4,8 @@ include {
 
 
 locals {
-  env_vars = read_terragrunt_config(find_in_parent_folders("env.hcl"))
-  global_vars = read_terragrunt_config(find_in_parent_folders("global.hcl"))
+  env_vars = read_TG_config(find_in_parent_folders("env.hcl"))
+  global_vars = read_TG_config(find_in_parent_folders("global.hcl"))
 
   cluster_name = "${local.env_vars.locals.enviroment}-${local.global_vars.locals.app_name}"
   kube_version = "1.29.0"

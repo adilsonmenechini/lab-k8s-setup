@@ -5,7 +5,7 @@ resource "helm_release" "cilium" {
   chart      = "cilium"
   version    = var.chart_version
 
-  namespace  = "kube-system"
+  namespace  = var.namespace
 
 
   wait         = true
@@ -13,6 +13,6 @@ resource "helm_release" "cilium" {
   timeout = 900
 
 
-  values = [file("${path.module}/values.yaml")]
+  values = [file(var.values_file)]  
 
 }

@@ -1,11 +1,11 @@
 variable "chart_version" {
   type        = string
   description = "version of the helm chart"
-  default     = "0.13.12"
+  default     = "0.14.8"
 }
 
-variable "host" {
-  description = "host"
+variable "cluster_host" {
+  description = "cluster_host"
   type        = string
   default = "fake-localshost"
 }
