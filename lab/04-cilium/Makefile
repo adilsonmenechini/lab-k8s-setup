@@ -1,10 +1,10 @@
-.PHONY: clean cluster cilium ingress-nginx all destroy 
+.PHONY: clean cluster cilium all destroy 
 
 # Variáveis
-TG_INIT_COMMAND = terragrunt init -upgrade --terragrunt-working-dir
-TG_PLAN_COMMAND = terragrunt plan --terragrunt-working-dir
-TG_APPLY_COMMAND = terragrunt apply --terragrunt-working-dir
-TG_DESTROY_COMMAND = terragrunt destroy --terragrunt-working-dir
+TG_INIT_COMMAND = terragrunt init -upgrade --working-dir
+TG_PLAN_COMMAND = terragrunt plan --working-dir
+TG_APPLY_COMMAND = terragrunt apply --working-dir
+TG_DESTROY_COMMAND = terragrunt destroy --working-dir
 
 # Descrições dos targets
 help: ## Exibe a ajuda do Makefile
@@ -23,13 +23,7 @@ cilium: ## Executa o plan e apply para o provisionamento do Cilium
 	$(TG_PLAN_COMMAND) toolkit/app/cilium
 	echo "yes" | $(TG_APPLY_COMMAND) toolkit/app/cilium
 
-ingress-nginx: ## Executa o plan e apply para o provisionamento do Ingress Nginx
-	$(TG_INIT_COMMAND) toolkit/app/common/ingress-nginx/
-	$(TG_PLAN_COMMAND) toolkit/app/common/ingress-nginx/
-	echo "yes" | $(TG_APPLY_COMMAND) toolkit/app/common/ingress-nginx/
-
-
-all: cluster cilium ingress-nginx ## Executa todos os targets
+all: cluster cilium  ## Executa todos os targets
 
 destroy: ## Destrói a infraestrutura
 	echo "yes" | $(TG_DESTROY_COMMAND) toolkit/cluster/

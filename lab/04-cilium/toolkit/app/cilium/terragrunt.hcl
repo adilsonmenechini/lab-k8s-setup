@@ -1,42 +1,20 @@
 locals {
-  values = <<EOF
-    kubeProxyReplacement: strict
-    k8sServicePort: 6443
-    hostServices:
-      enabled: true
-    externalIPs:
-      enabled: true
-    nodePort:
-      enabled: true
-    hostPort:
-      enabled: true
-    image:
-      pullPolicy: IfNotPresent
-    ipam:
-      mode: kubernetes
-    hubble:
-      enabled: true
-      relay:
-        enabled: true
-      ui:
-        enabled: true
-        ingress:
-          enabled: true
-  EOF
+  vars_local  = yamldecode(file(("local.yaml")))
+  vars_values = yamldecode(file(("values.yaml")))
 }
 
 dependency "cluster" {
   config_path = "../../cluster"
   mock_outputs = {
-    cluster_host                   = "fake-host"
+    cluster_host           = "fake-host"
     client_certificate     = "fake-client_certificate"
     client_key             = "fake-client_key"
     cluster_ca_certificate = "fake-cluster_ca_certificate"
   }
 }
 
-include {
-  path = find_in_parent_folders()
+include "root" {
+  path = find_in_parent_folders("root.hcl")
 }
 
 terraform {
@@ -44,9 +22,24 @@ terraform {
 }
 
 inputs = {
-  cluster_host                   = dependency.cluster.outputs.cluster_host
+  cluster_host           = dependency.cluster.outputs.cluster_host
   client_certificate     = dependency.cluster.outputs.client_certificate
   client_key             = dependency.cluster.outputs.client_key
   cluster_ca_certificate = dependency.cluster.outputs.cluster_ca_certificate
-  values_file            = local.values
+  chart_version          = local.vars_local.chart_version 
+  values_file = merge(local.vars_values, {
+    ingressController = merge(
+      local.vars_values.ingressController, # Mantém o conteúdo anterior de "ingressController"
+      {
+        service = merge(
+          local.vars_values.ingressController.service, # Mantém o conteúdo anterior de "service"
+          {
+            insecureNodePort = dependency.cluster.outputs.extra_port_mappings["http"].container_port,
+            secureNodePort   = dependency.cluster.outputs.extra_port_mappings["https"].container_port
+          }
+        )
+      }
+    )
+  })
+
 }

@@ -1,0 +1,26 @@
+ipam:
+  mode: "kubernetes"
+hostServices:
+  enabled: true
+externalIPs:
+  enabled: true
+nodePort:
+  enabled: true
+hostPort:
+  enabled: true
+ingressController:
+  enabled: true
+  default: true
+  service:
+    type: "NodePort"
+    insecureNodePort: "30080"
+    secureNodePort: "30443"
+  loadBalancerMode: "shared"
+hubble:
+  enabled: true
+  relay:
+    enabled: true
+  ui:
+    enabled: true
+    ingress:
+      enabled: true
