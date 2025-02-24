@@ -1,0 +1,4 @@
+app_name: "cilium"
+environment: "toolkit"
+domain_url: "kind.local"
+pod_subnet: "10.10.0.0/16"

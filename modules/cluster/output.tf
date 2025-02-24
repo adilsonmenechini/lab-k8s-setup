@@ -25,10 +25,10 @@ output "extra_port_mappings" {
   value = var.extra_port_mappings
 }
 
-output "pod_cidr" {
-  value = var.pod_subnet
+output "pod_subnet" {
+  value = var.disable_default_cni ? null : var.pod_subnet
 }
 
 output "service_cidr" {
-  value = var.service_subnet
+  value = var.disable_default_cni ? null : var.service_subnet
 }

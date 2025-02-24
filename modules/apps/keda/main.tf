@@ -3,12 +3,12 @@ resource "helm_release" "keda" {
 
   repository = "https://kedacore.github.io/charts"
   chart      = "keda"
-  
-  version    = var.chart_version
 
-  namespace  = "keda"
+  version = var.chart_version
+
+  namespace        = "keda"
   create_namespace = true
-  
+
 
   wait = true
 

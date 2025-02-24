@@ -5,18 +5,18 @@ resource "helm_release" "ingress_nginx" {
   chart      = "ingress-nginx"
   version    = var.chart_version
 
-  namespace  = "ingress-nginx"
+  namespace        = "ingress-nginx"
   create_namespace = true
 
   wait         = true
   force_update = true
 
   set {
-    name = "service.type"
+    name  = "service.type"
     value = var.service_type
   }
 
-  values = [file("${path.module}/values.yaml")]
+  values = [file("${path.module}/file/values.yaml")]
 }
 
 resource "null_resource" "wait_for_ingress_nginx" {
@@ -38,6 +38,6 @@ resource "null_resource" "wait_for_ingress_nginx" {
 }
 
 data "external" "nginx_lb_ip" {
-  program = ["bash", "-c", "kubectl get svc ingress-nginx-controller -n ingress-nginx -o json | jq -r '.status.loadBalancer.ingress[].ip' | jq -nR '{ ip: input }'"]
+  program    = ["bash", "-c", "kubectl get svc ingress-nginx-controller -n ${var.namespace} -o json | jq -r '.status.loadBalancer.ingress[].ip' | jq -nR '{ ip: input }'"]
   depends_on = [null_resource.wait_for_ingress_nginx]
 }

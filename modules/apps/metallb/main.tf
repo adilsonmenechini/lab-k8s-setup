@@ -6,12 +6,12 @@ resource "helm_release" "metallb" {
   chart      = "metallb"
   version    = var.chart_version
 
-  namespace  = "metallb-system"
+  namespace        = "metallb-system"
   create_namespace = true
 
   force_update = true
-  wait    = true
-  timeout = 700
+  wait         = true
+  timeout      = 700
 }
 
 resource "null_resource" "wait_for_metallb" {

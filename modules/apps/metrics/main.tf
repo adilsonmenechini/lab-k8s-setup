@@ -6,9 +6,9 @@ resource "helm_release" "metrics_server" {
   namespace  = "kube-system"
   version    = var.chart_version
 
-  
+
   values = [file("${path.module}/values.yaml")]
-  
+
   wait = true
 
 }

@@ -46,11 +46,11 @@ inputs = {
     }
   }
   vault_policies = {
-    "developers" = "file/developer_policy.hcl"
-    "operations" = "file/operation_policy.hcl"
+    "developers"       = "file/developer_policy.hcl"
+    "operations"       = "file/operation_policy.hcl"
     "acesso_developer" = "file/web_developer_policy.hcl"
-    "acesso_operator" = "file/web_operator_policy.hcl"
-    "admin" = "file/admin_policy.hcl"
+    "acesso_operator"  = "file/web_operator_policy.hcl"
+    "admin"            = "file/admin_policy.hcl"
   }
 
   vault_k8s_roles = {

@@ -26,11 +26,11 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version) | version of the helm chart | `string` | `"0.13.12"` | no |
+| <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version) | version of the helm chart | `string` | `"0.14.8"` | no |
 | <a name="input_client_certificate"></a> [client\_certificate](#input\_client\_certificate) | client certificate | `string` | `"fake-client-certificate"` | no |
 | <a name="input_client_key"></a> [client\_key](#input\_client\_key) | client key | `string` | `"fake-client-key"` | no |
 | <a name="input_cluster_ca_certificate"></a> [cluster\_ca\_certificate](#input\_cluster\_ca\_certificate) | cluster ca certificate | `string` | `"fake-cluster-ca-certificate"` | no |
-| <a name="input_host"></a> [host](#input\_host) | host | `string` | `"fake-localshost"` | no |
+| <a name="input_cluster_host"></a> [cluster\_host](#input\_cluster\_host) | cluster\_host | `string` | `"fake-localshost"` | no |
 
 ## Outputs
 

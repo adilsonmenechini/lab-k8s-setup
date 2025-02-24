@@ -1,0 +1,10 @@
+encryption:
+  enabled: true
+  type: "wireguard"
+ipam:
+  mode: "kubernetes"
+kubeProxyReplacement: true
+l2announcements:
+  enabled: true
+nodeIPAM:
+  enabled: true

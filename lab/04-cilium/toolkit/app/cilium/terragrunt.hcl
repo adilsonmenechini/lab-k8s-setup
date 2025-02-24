@@ -1,5 +1,5 @@
 locals {
-  vars_local  = yamldecode(file(("local.yaml")))
+  local_vars  = yamldecode(file(("local.yaml")))
   vars_values = yamldecode(file(("values.yaml")))
 }
 
@@ -26,7 +26,7 @@ inputs = {
   client_certificate     = dependency.cluster.outputs.client_certificate
   client_key             = dependency.cluster.outputs.client_key
   cluster_ca_certificate = dependency.cluster.outputs.cluster_ca_certificate
-  chart_version          = local.vars_local.chart_version 
+  chart_version          = local.local_vars.chart_version 
   values_file = merge(local.vars_values, {
     ingressController = merge(
       local.vars_values.ingressController, # Mantém o conteúdo anterior de "ingressController"

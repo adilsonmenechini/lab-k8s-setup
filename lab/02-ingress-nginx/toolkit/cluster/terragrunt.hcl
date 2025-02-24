@@ -3,7 +3,7 @@
 locals {
   local_vars   = yamldecode(file("local.yaml"))
   global_vars  = yamldecode(file(find_in_parent_folders("global.yaml")))
-  cluster_name = "${local.global_vars.enviroment}-${local.global_vars.app_name}"
+  cluster_name = "${local.global_vars.environment}-${local.global_vars.app_name}"
   extra_port_mappings = merge(
     {
       port1 = {

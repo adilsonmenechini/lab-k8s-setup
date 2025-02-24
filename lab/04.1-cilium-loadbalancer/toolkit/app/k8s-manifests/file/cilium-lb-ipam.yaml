@@ -1,0 +1,10 @@
+apiVersion: "cilium.io/v2alpha1"
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: cilium-lb-ipam
+  namespace: kube-system
+spec:
+  blocks:
+  - cidr: "10.100.0.0/24"
+  - start: "20.100.0.100"
+    stop: "20.100.0.200"
