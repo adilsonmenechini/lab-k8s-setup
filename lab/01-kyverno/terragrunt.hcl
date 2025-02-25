@@ -1,3 +1,3 @@
 locals {
-  folders     = split("/", path_relative_to_include())
+  folders = split("/", path_relative_to_include())
 }

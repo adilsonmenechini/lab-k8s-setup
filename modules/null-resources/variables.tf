@@ -1,9 +1,6 @@
-variable "yaml_files" {
-  type    = list(string)
-  default = [
-    "test01.yaml", 
-    "test01.yaml"
-    ]
+variable "k8s_cmd" {
+  type    = string
+  default = null
 }
 
 variable "cluster_host" {

@@ -35,5 +35,5 @@ inputs = {
   worker_counts       = local.local_vars.worker_counts
   extra_port_mappings = local.extra_port_mappings
   disable_default_cni = true
-  pod_subnet            = local.global_vars.pod_subnet
+  pod_subnet          = local.global_vars.pod_subnet
 }

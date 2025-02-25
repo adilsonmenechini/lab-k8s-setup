@@ -7,4 +7,7 @@
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [opentofu](https://opentofu.org/docs/intro/install/)
 - [terragrunt](https://terragrunt.gruntwork.io/docs/getting-started/install/)
+- [yq](https://github.com/mikefarah/yq)
 
+Docker Mac Net Connect
+- [Net Connect](https://github.com/chipmk/docker-mac-net-connect/tree/main)

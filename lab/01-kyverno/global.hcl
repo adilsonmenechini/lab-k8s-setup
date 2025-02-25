@@ -1,3 +1,3 @@
-locals { 
-    app_name = "kyverno" 
+locals {
+  app_name = "kyverno"
 }

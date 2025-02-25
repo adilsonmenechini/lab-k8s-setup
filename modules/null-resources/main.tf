@@ -1,8 +1,9 @@
-
-resource "null_resource" "this" {
-  for_each = toset(var.yaml_files)
-
+resource "null_resource" "cmd" {
+  triggers = {
+    key = uuid()
+  }
+  
   provisioner "local-exec" {
-    command = "kubectl apply -f ${each.value} --namespace ${var.namespace}"
+    command = var.k8s_cmd
   }
 }

@@ -1,7 +1,6 @@
 locals {
   local_vars  = yamldecode(file(("local.yaml")))
   global_vars = yamldecode(file(find_in_parent_folders("global.yaml")))
-  vars_values = file("values.yaml")
 }
 
 dependency "cluster" {
@@ -11,9 +10,9 @@ dependency "cluster" {
     client_certificate     = "fake-client_certificate"
     client_key             = "fake-client_key"
     cluster_ca_certificate = "fake-cluster_ca_certificate"
-    pod_subnet               = "fake-pod_subnet"
+    pod_subnet             = "fake-pod_subnet"
     cluster_name           = "fake-cluster_name"
-
+    kind_network           = "fake-kind_network"
   }
 }
 
@@ -34,7 +33,7 @@ inputs = {
   helm_release = {
     cilium = {
       chart      = "cilium"
-      namespace  = "kube-system"
+      namespace  = local.local_vars.namespace
       repository = "https://helm.cilium.io/"
       version    = local.local_vars.chart_version
 
@@ -48,12 +47,16 @@ inputs = {
       create_namespace = true
 
       values_paths = [
-        file("values.yaml")
+        file("file/values.yaml")
       ]
       set = [
         {
           name  = "cluster.name"
           value = dependency.cluster.outputs.cluster_name
+        },
+        {
+          name  = "ipam.operator.clusterPoolIPv4PodCIDRList"
+          value = local.global_vars.pod_subnet
         }
       ]
     }

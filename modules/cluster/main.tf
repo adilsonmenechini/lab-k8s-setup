@@ -38,3 +38,7 @@ resource "kind_cluster" "default" {
 
   }
 }
+
+data "docker_network" "main" {
+  name = "kind"
+}

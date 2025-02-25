@@ -1,3 +1,3 @@
 locals {
-    environment = "toolkit"
+  environment = "toolkit"
 }

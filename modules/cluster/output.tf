@@ -32,3 +32,7 @@ output "pod_subnet" {
 output "service_cidr" {
   value = var.disable_default_cni ? null : var.service_subnet
 }
+
+output "kind_network" {
+  value = element(data.docker_network.main.ipam_config[*].subnet, 0)
+}

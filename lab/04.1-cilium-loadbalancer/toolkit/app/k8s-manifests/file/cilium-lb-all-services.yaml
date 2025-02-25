@@ -10,3 +10,20 @@ spec:
     matchLabels:
       homelab/public-service: "true"
   loadBalancerIPs: true
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: cilium-test-lb-svc
+  labels:
+    app: cilium-test-lb
+spec:
+  selector:
+    app: cilium-test-lb
+  type: LoadBalancer
+  ports:
+  - name: cilium-test-lb
+    protocol: TCP
+    port: 80
+    targetPort: 80
