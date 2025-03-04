@@ -1,0 +1,5 @@
+kube_version: "1.29.0"
+worker_counts: 3
+cluster_id: 2
+pod_subnet: "10.20.0.0/16"
+service_cidr: "10.21.0.0/16"

@@ -56,3 +56,15 @@ variable "cluster_ca_certificate" {
   type        = string
   default     = "fake-cluster-ca-certificate"
 }
+
+
+variable "set" {
+  description = "Set values for the Helm Chart"
+  type = list(object({
+    name  = string
+    value = string
+    type  = optional(string)
+  }))
+  default = []
+
+}

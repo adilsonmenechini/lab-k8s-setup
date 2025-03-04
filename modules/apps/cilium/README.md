@@ -31,6 +31,7 @@ No modules.
 | <a name="input_cluster_host"></a> [cluster\_host](#input\_cluster\_host) | cluster\_host | `string` | `"fake-localshost"` | no |
 | <a name="input_helm_repository"></a> [helm\_repository](#input\_helm\_repository) | Helm Chart Repository URL | `string` | `"https://helm.cilium.io/"` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace where to install the services | `string` | `"kube-system"` | no |
+| <a name="input_set"></a> [set](#input\_set) | Set values for the Helm Chart | <pre>list(object({<br>    name  = string<br>    value = string<br>    type  = optional(string)<br>  }))</pre> | `[]` | no |
 | <a name="input_values_file"></a> [values\_file](#input\_values\_file) | values file | `any` | `{}` | no |
 
 ## Outputs

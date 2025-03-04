@@ -37,22 +37,22 @@ variable "cluster_ip" {
 variable "vault_address" {
   description = "vault address"
   type        = string
-  default = "http://localhost"
+  default     = "http://localhost"
 }
 
 variable "vault_port" {
   description = "vault address"
   type        = string
-  default = "32000"
+  default     = "32000"
 }
 
 variable "vault_mount_kv" {
   description = "Configurações dos mounts do Vault"
-  type        = map(object({
+  type = map(object({
     type        = string
     description = string
   }))
-  default     = {
+  default = {
     "architects" = {
       type        = "kv-v2"
       description = "KV2 Secrets Engine for Operations."
@@ -62,11 +62,11 @@ variable "vault_mount_kv" {
 
 variable "vault_generic_secrets" {
   description = "Segredos armazenados no Vault"
-  type        = map(object({
+  type = map(object({
     mount     = string
     data_json = string
   }))
-  default     = {
+  default = {
     "architect_sample_data" = {
       mount     = "architects"
       data_json = <<EOT

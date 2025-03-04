@@ -9,7 +9,7 @@ resource "vault_auth_backend" "kubernetes" {
 resource "vault_kubernetes_auth_backend_config" "k8s_auth" {
   backend = vault_auth_backend.kubernetes.path
 
-  kubernetes_host = "https://kubernetes.default.svc.cluster.local:443"
+  kubernetes_host      = "https://kubernetes.default.svc.cluster.local:443"
   disable_local_ca_jwt = false
 }
 
@@ -45,12 +45,12 @@ resource "vault_kubernetes_auth_backend_role" "roles" {
   for_each                         = var.vault_k8s_roles
   backend                          = "kubernetes"
   role_name                        = "${each.key}-role"
-  bound_service_account_names      = [ "${each.key}-sa" ]
+  bound_service_account_names      = ["${each.key}-sa"]
   bound_service_account_namespaces = each.value.bound_service_account_namespaces
   token_ttl                        = each.value.token_ttl
   token_max_ttl                    = each.value.token_max_ttl
   token_policies                   = each.value.token_policies
-  audience                          = "https://kubernetes.default.svc.cluster.local"
+  audience                         = "https://kubernetes.default.svc.cluster.local"
 }
 
 resource "vault_policy" "this" {
@@ -76,5 +76,5 @@ resource "vault_generic_endpoint" "users" {
     policies = each.value.policies
   })
 
-  depends_on = [ vault_kubernetes_auth_backend_role.roles ]
+  depends_on = [vault_kubernetes_auth_backend_role.roles]
 }

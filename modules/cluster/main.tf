@@ -1,5 +1,5 @@
 resource "kind_cluster" "default" {
-  name           = "${var.cluster_name}"
+  name           = var.cluster_name
   wait_for_ready = true
 
   kind_config {
@@ -7,9 +7,9 @@ resource "kind_cluster" "default" {
     api_version = "kind.x-k8s.io/v1alpha4"
     networking {
       disable_default_cni = var.disable_default_cni
-      kube_proxy_mode     = var.disable_default_cni ? null : var.kube_proxy_mode
-      pod_subnet          = var.disable_default_cni ? null : var.pod_subnet
-      service_subnet      = var.disable_default_cni ? null : var.service_subnet
+      kube_proxy_mode     = var.kube_proxy_mode
+      pod_subnet          = var.pod_subnet
+      service_subnet      = var.service_subnet
     }
     node {
       role  = "control-plane"

@@ -1,7 +1,7 @@
 variable "helm_release" {
   description = "A Release is an instance of a chart running in a Kubernetes cluster."
   type = map(object({
-    chart       = string
+    chart            = string
     repository       = string
     namespace        = string
     version          = string
@@ -15,7 +15,7 @@ variable "helm_release" {
     recreate_pods    = optional(bool)
     create_namespace = optional(bool)
     values_paths     = optional(list(string))
-    set              = optional(list(object({
+    set = optional(list(object({
       name  = string
       value = optional(string)
       type  = optional(string)
@@ -24,7 +24,7 @@ variable "helm_release" {
 
   default = {
     demo = {
-      chart       = "SecretProviderClass"
+      chart            = "SecretProviderClass"
       version          = "0.1.0"
       repository       = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
       namespace        = "default"
@@ -36,7 +36,7 @@ variable "helm_release" {
       timeout          = 900
       recreate_pods    = true
       create_namespace = true
-      values_paths     = [
+      values_paths = [
         "/charts/SecretProviderClass/values.yaml",
         "/charts/SecretProviderClass/values-demo.yaml"
       ]

@@ -5,14 +5,14 @@ resource "helm_release" "istio-base" {
   chart      = "base"
   version    = var.chart_version
 
-  namespace  = "istio-system"
+  namespace        = "istio-system"
   create_namespace = true
 
-  lint       = true
-  atomic     = true
+  lint         = true
+  atomic       = true
   wait         = true
   force_update = true
-  timeout = 900
+  timeout      = 900
 
 
   values = [file("${path.module}/file/values.yaml")]

@@ -18,7 +18,16 @@ resource "helm_release" "cilium" {
   force_update = true
   timeout      = 900
 
-  #values = var.values_file == "" ? [file("${path.module}/file/values.yaml")] : [yamldecode("${var.values_file}")]
   values = [local.values]
+
+  dynamic "set" {
+    for_each = var.set
+    content {
+      name  = set.value.name
+      value = lookup(set.value, "value", null)
+      type  = lookup(set.value, "type", null)
+    }
+
+  }
 
 }

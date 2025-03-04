@@ -6,11 +6,11 @@ resource "kubernetes_manifest" "this" {
   manifest = merge(
     yamldecode(each.value),
     { "metadata" = merge(
-        yamldecode(each.value).metadata,
-        # Adiciona namespace apenas se for um recurso Namespaced
-        contains(["Deployment", "Service", "ConfigMap", "Secret", "Ingress"], yamldecode(each.value).kind) 
-          ? { namespace = var.namespace } 
-          : {}
+      yamldecode(each.value).metadata,
+      # Adiciona namespace apenas se for um recurso Namespaced
+      contains(["Deployment", "Service", "ConfigMap", "Secret", "Ingress"], yamldecode(each.value).kind)
+      ? { namespace = var.namespace }
+      : {}
       )
     }
   )

@@ -5,12 +5,12 @@ terraform {
 
     kind = {
       source  = "tehcyx/kind"
-      version = "0.4.0"
+      version = ">=0.8.0"
     }
     docker = {
-     source  = "kreuzwerker/docker"
-     version = "3.0.2"
-   }
+      source  = "kreuzwerker/docker"
+      version = "3.0.2"
+    }
   }
 }
 

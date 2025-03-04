@@ -1,0 +1,3 @@
+app_name: "cilium"
+environment: "toolkit"
+domain_url: "kind.local"

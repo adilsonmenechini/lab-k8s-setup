@@ -1,3 +1,0 @@
-app_name: "03-vault"
-environment: "dev"
-domain_url: "kind.local"

@@ -1,13 +1,13 @@
 resource "helm_release" "helm_release" {
-  for_each      = var.helm_release
-  name          = lookup(each.value, "name", each.key)
-  chart         = lookup(each.value, "chart", null)
-  repository    = lookup(each.value, "repository", null)
-  version       = lookup(each.value, "version", null)
-  namespace     = lookup(each.value, "namespace", "default")
+  for_each   = var.helm_release
+  name       = lookup(each.value, "name", each.key)
+  chart      = lookup(each.value, "chart", null)
+  repository = lookup(each.value, "repository", null)
+  version    = lookup(each.value, "version", null)
+  namespace  = lookup(each.value, "namespace", "default")
 
-  values = lookup(each.value, "values_paths", null)
-  recreate_pods = lookup(each.value, "recreate_pods", null)
+  values           = lookup(each.value, "values_paths", null)
+  recreate_pods    = lookup(each.value, "recreate_pods", null)
   create_namespace = lookup(each.value, "create_namespace", true)
 
   lint         = lookup(each.value, "lint", false)

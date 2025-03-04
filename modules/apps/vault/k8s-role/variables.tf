@@ -37,23 +37,23 @@ variable "cluster_ip" {
 variable "vault_address" {
   description = "vault address"
   type        = string
-  default = "http://localhost"
+  default     = "http://localhost"
 }
 
 variable "vault_port" {
   description = "vault address"
   type        = string
-  default = "32000"
+  default     = "32000"
 }
 
 
 variable "vault_mount_kv" {
   description = "Configurações dos mounts do Vault"
-  type        = map(object({
+  type = map(object({
     type        = string
     description = string
   }))
-  default     = {
+  default = {
     "admins" = {
       type        = "kv-v2"
       description = "KV2 Secrets Engine for Operations."
@@ -64,11 +64,11 @@ variable "vault_mount_kv" {
 
 variable "vault_users" {
   description = "Usuários autenticados via userpass"
-  type        = map(object({
+  type = map(object({
     password = string
     policies = list(string)
   }))
-  default     = {
+  default = {
     "adilson" = {
       password = "senhaSegura123"
       policies = ["acesso_web", "developers"]
@@ -78,9 +78,9 @@ variable "vault_users" {
 
 variable "vault_policies" {
   description = "Map of Vault policies and their file paths"
-  type = map(string)
+  type        = map(string)
   default = {
-    "admins"     = "file/admin_policy.hcl"
+    "admins" = "file/admin_policy.hcl"
 
     # Adicione outras políticas conforme necessário
   }

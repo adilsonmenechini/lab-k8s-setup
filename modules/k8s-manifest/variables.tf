@@ -1,9 +1,9 @@
 variable "yaml_files" {
-  type    = list(string)
+  type = list(string)
   default = [
-    "test01.yaml", 
+    "test01.yaml",
     "test01.yaml"
-    ]
+  ]
 }
 
 variable "cluster_host" {
