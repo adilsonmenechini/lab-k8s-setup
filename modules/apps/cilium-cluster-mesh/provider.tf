@@ -2,7 +2,7 @@ terraform {
   required_providers {
     cilium = {
       source  = "littlejo/cilium"
-      version = ">=0.2.15-rc1"
+      version = ">=0.2.14"
     }
   }
   required_version = ">=1.6"
@@ -16,6 +16,4 @@ provider "kubernetes" {
   cluster_ca_certificate = var.cluster_ca_certificate
 }
 
-provider "cilium" {
-  #config_path = var.cluster_kubeconfig
-}
+provider "cilium" {}
